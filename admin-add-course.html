@@ -273,32 +273,32 @@
 						<div class="col-sm-12">
 							<div class="mb-3">
 								<span>Select course display picture</span>
-								<input name="picture" class="form-control required" type="file" placeholder="">
+								<input name="picture" class="form-control required" type="file" placeholder="" required>
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="mb-3">
-								<input name="name" class="form-control required" type="text" placeholder="Enter course name">
+								<input name="name" class="form-control required" type="text" placeholder="Enter course name" required>
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="mb-3">
-								<input name="price" class="form-control required" type="number" placeholder="Enter course price">
+								<input name="price" class="form-control required" type="number" placeholder="Enter course price" required>
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="mb-3">
-								<input name="duration" class="form-control required" type="number" placeholder="Enter course duration">
+								<input name="duration" class="form-control required" type="number" placeholder="Enter course duration" required>
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="mb-3">
-								<input name="overview" class="form-control required" type="text" placeholder="Enter course overview">
+								<input name="overview" class="form-control required" type="text" placeholder="Enter course overview" required>
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="mb-3">
-								<input name="topics" class="form-control required" type="text" placeholder="Enter course topics">
+								<input name="topics" class="form-control required" type="text" placeholder="Enter course topics" required>
 							</div>
 						</div>
 					</div>
@@ -325,6 +325,9 @@
 			});
 			 const res = await req.json();
 			 console.log(res);
+			 if(res.status == 1){
+				window.location = "page-course-details.html?id="+ res.data;
+			 }
 		 }
 	</script>
 </section>

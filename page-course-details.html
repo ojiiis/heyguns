@@ -247,8 +247,8 @@
 		<div class="title-outer">
 			<h1 class="title">Course Details</h1>
 			<ul class="page-breadcrumb">
-				<li><a href="index-2.html">Home</a></li>
-				<li>Course Details</li>
+				<li><a href="./">Home</a></li>
+				<li id="course_name">Course Details</li>
 			</ul>
 		</div>
 	</div>
@@ -261,49 +261,15 @@
 			<!--Start courses Details Content-->
 			<div class="col-xl-8 col-lg-8">
 				<div class="courses-details__content">
-					<img src="images/resource/course-details.jpg" alt="" />
+					<img id="course_image" src="" alt="" />
 					<h2 class="mt-4">course Overview</h2>
-					<p>Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Aelltes port lacus quis enim var sed efficitur turpis gilla sed sit amet finibus eros. Lorem Ipsum is simply dummy text of the printing.</p>
-					<p>When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </p>
+					<p id="course_overview"> </p>
 					<div class="content mt-40">
 						<div class="text">
 							<h3>What You Will Learn?</h3>
-							<p>Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui dolorem ipsum quia quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+							<div id="course_topic"></div>
 						</div>
-						<div class="row mt-30">
-							<!-- Category Block Two -->
-							<div class="category-block-current-two col-lg-4 col-md-6 col-sm-6">
-								<div class="inner-box">
-									<div class="icon-box">
-										<i class="icon flaticon-elearning"></i>
-									</div>
-									<h4 class="title">Online degree programs</h4>
-									<span class="sub-title">26 Courses</span>
-								</div>
-							</div>
-
-							<!-- Category Block Two -->
-							<div class="category-block-current-two col-lg-4 col-md-6 col-sm-6">
-								<div class="inner-box">
-									<div class="icon-box">
-										<i class="icon flaticon-study-1"></i>
-									</div>
-									<h4 class="title">Non-degree programs</h4>
-									<span class="sub-title">38 Courses</span>
-								</div>
-							</div>
-
-							<!-- Category Block Two -->
-							<div class="category-block-current-two col-lg-4 col-md-6 col-sm-6">
-								<div class="inner-box">
-									<div class="icon-box">
-										<i class="icon flaticon-study"></i>
-									</div>
-									<h4 class="title">Off campus programs</h4>
-									<span class="sub-title">13 Courses</span>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 					<div class=" mt-25">
 						<h3>Frequently Asked Question</h3>
@@ -354,12 +320,12 @@
 					<ul class="course-details-info">
 						<li class="course-details-info-link">
 							<span class="course-details-info-icon"><i class="far fa-clock"></i></span>
-							Durations: <span>10 hours</span>
+							Durations: <span><span id="course_duration"></span> hours</span>
 						</li>
-						<li class="course-details-info-link">
+						<!-- <li class="course-details-info-link">
 							<span class="course-details-info-icon"><i class="far fa-folder-open"></i></span>
-							Lectures: <span>15</span>
-						</li>
+							Lectures: <span >15</span>
+						</li> -->
 						<li class="course-details-info-link">
 							<span class="course-details-info-icon"><i class="far fa-user-circle"></i></span>
 							Students: <span>Max 50</span>
@@ -376,11 +342,11 @@
 
 					<div class="course-details-price">
 						<p class="course-details-price-text">Course price</p>
-						<p class="course-details-price-amount">$18.00</p>
-						<a href="#" class="theme-btn btn-style-two course-details-price-btn">Buy This Course</a>
+						<p class="course-details-price-amount"><span id="course_price"></span></p>
+						<a href="#" class="theme-btn btn-style-two course-details-price-btn">Apply for this Course</a>
 					</div>
 
-					<div class="latest-course mb-30">
+					<!-- <div class="latest-course mb-30">
 						<h4 class="latest-course-title mb-30">New Courses</h4>
 						<div class="latest-course-item">
 							<div class="latest-course-img">
@@ -433,7 +399,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 				</div>
 			</div>
@@ -536,7 +502,8 @@
 <!-- Scroll To Top -->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
 
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.js"></script> 
+
+<script src="js/jquery.js"></script> 
 <script src="js/popper.min.js"></script>
 
 
@@ -552,6 +519,29 @@
 <script src="js/swiper.min.js"></script>
 <script src="js/owl.js"></script>
 <script src="js/script.js"></script>
+
+<script>
+	const queryParams = getQueryParams();
+	var apilink = 'http://localhost/mray/';
+	(
+		async ()=>{
+			const data = new FormData();
+			data.append('id',queryParams.id);
+			data.append('course_details',1);
+			const req = await fetch(apilink,{
+				method:"POST",
+				body: data
+			})
+			const res = await req.json();
+			console.log(res.data)
+            document.getElementById('course_duration').textContent = res.data[0].duration;
+			document.getElementById('course_name').textContent = res.data[0].name;
+			document.getElementById('course_image').src = "images/"+res.data[0].picture;
+			document.getElementById('course_duration').textContent = res.data[0].duration;
+			document.getElementById('course_duration').textContent = res.data[0].duration;
+		}
+	)()
+</script>
 </body>
 
 <!-- Mirrored from html.kodesolution.com/2024/edulerns-php/page-course-details.php by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Jan 2025 11:48:53 GMT -->

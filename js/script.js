@@ -850,3 +850,20 @@ var THEMEMASCOT = {};
 	});	
 
 })(window.jQuery);
+
+function getQueryParams() {
+    const queryString = window.location.search; // Get the query string from the URL
+    const params = new URLSearchParams(queryString); // Create a URLSearchParams object
+    const queryParams = {};
+
+    // Iterate through all entries in the URLSearchParams object
+    for (const [key, value] of params.entries()) {
+        queryParams[key] = value; // Add each key-value pair to the object
+    }
+
+    return queryParams; // Return the object containing all query parameters
+}
+
+// Example usage
+// const queryParams = getQueryParams();
+// console.log(queryParams); 
